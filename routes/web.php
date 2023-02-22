@@ -21,6 +21,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::resource('/users', App\Http\Controllers\UserController::class)->name('users');
 
+Route::resource('/roles', App\Http\Controllers\RoleController::class)->name('roles');;
+
+Route::resource('/permissions', App\Http\Controllers\PermissionController::class)->name('permissions');;
 
 Route::get('/tables', [App\Http\Controllers\HomeController::class, 'tables'])->name('tables');
