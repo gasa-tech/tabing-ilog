@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -13,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return 'test';
+        $users = User::where('id','!=',1)->get();
+        return view('users.index',compact('users'));
     }
 
     /**
@@ -23,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::get();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -34,7 +38,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->name);
+        $user->save();
+        $user->assignRole($request->roles);
+
+        return redirect('/users')->with('success','Record saved successfully');
     }
 
     /**
@@ -54,9 +65,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::get();
+        return view('users.edit',compact('user','roles'));
     }
 
     /**
@@ -66,9 +78,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->name);
+        $user->update();
+        $user->syncRoles($request->roles);
+
+        return redirect('/users')->with('success','Record updated successfully');
     }
 
     /**
