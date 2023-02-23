@@ -15,7 +15,11 @@ class CreatePriceBookBundlesTable extends Migration
     {
         Schema::create('price_book_bundles', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->unsignedBigInteger('price_book_entry_id');
             $table->timestamps();
+            
+            $table->foreign('price_book_entry_id')->references('id')->on('price_book_entries')->onDelete('cascade');
         });
     }
 

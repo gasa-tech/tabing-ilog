@@ -15,6 +15,8 @@ class CreatePriceBooksTable extends Migration
     {
         Schema::create('price_books', function (Blueprint $table) {
             $table->id();
+            $table->decimal('price',6,4);
+            $table->string('formula')->nullable();
             $table->timestamps();
         });
     }

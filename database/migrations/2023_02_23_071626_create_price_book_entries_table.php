@@ -15,7 +15,12 @@ class CreatePriceBookEntriesTable extends Migration
     {
         Schema::create('price_book_entries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('pricebook_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
+
+            $table->foreign('pricebook_id')->references('id')->on('price_books')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
