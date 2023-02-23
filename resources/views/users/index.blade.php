@@ -9,12 +9,16 @@
             <div class="d-flex mb-6 align-items-center justify-content-between">
               <h4 class="mb-0">Users List</h4>
               <div>
+                @can('edit user')
                 <a class="btn btn-sm btn-primary d-inline-flex align-items-center" href="{{ route('users.create') }}">
                   <span>Create User</span>
                 </a>
+                @endcan
+                @can('view roles','edit roles')
                 <a class="btn btn-sm btn-primary d-inline-flex align-items-center" href="{{ route('roles.index') }}">
                   <span>View Roles</span>
                 </a>
+                @endcan
               </div>
             </div>
           </div>

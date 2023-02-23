@@ -21,12 +21,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ["auth"]], function () {
-    Route::resource('users', App\Http\Controllers\UserController::class);
-
-    Route::resource('roles', App\Http\Controllers\RoleController::class);
-
-    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['permission:view users|edit users']], function () {
+        Route::resource('users', App\Http\Controllers\UserController::class);    
+    });
+    Route::group(['middleware' => ['permission:view roles|edit roles']], function () {
+        Route::resource('roles', App\Http\Controllers\RoleController::class);
+    });
 });
 
 Route::get('/tables', [App\Http\Controllers\HomeController::class, 'tables'])->name('tables');
