@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission as Perms;
 
 class RoleController extends Controller
 {
@@ -13,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::where('id','!=',1)->get();
+        return view('roles.index',compact('roles'));
     }
 
     /**
@@ -23,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $perms = Perms::select('name')->latest()->get();
+        return view('roles.create',compact('perms'));
     }
 
     /**
@@ -34,7 +38,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = new Role;
+        $role->name = $request->name;
+        $role->save();
+        $role->syncPermissions($request->perms);
+
+        return redirect('/roles')->with('success','Record saved successfully');
     }
 
     /**
@@ -43,9 +52,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        return view('roles.show',compact('role'));
     }
 
     /**
@@ -54,9 +63,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $perms = Perms::select('name')->latest()->get();
+        return view('roles.edit',compact('perms','role'));
     }
 
     /**
@@ -66,9 +76,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $role->name = $request->name;
+        $role->update();
+        $role->syncPermissions($request->perms);
+
+        return redirect('/roles')->with('success','Record updated successfully');
     }
 
     /**
