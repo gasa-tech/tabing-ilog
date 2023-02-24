@@ -23,10 +23,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['permission:view users|edit users']], function () {
-        Route::resource('users', App\Http\Controllers\UserController::class);    
+        Route::resource('users', App\Http\Controllers\UserController::class);
     });
     Route::group(['middleware' => ['permission:view roles|edit roles']], function () {
         Route::resource('roles', App\Http\Controllers\RoleController::class);
+    });
+    Route::group(['middleware' => ['permission:view categories|edit categories|delete categories']], function () {
+        Route::resource('categories', App\Http\Controllers\CategoryController::class);
     });
 });
 
