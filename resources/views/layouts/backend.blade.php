@@ -117,6 +117,17 @@
                         
                       </a>
                     </li>
+                    @can('view customers','edit customers')
+                    <li class="nav-item nav-pills">
+                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{ route('customers.index') }}">
+                        <span class="d-inline-block text-secondary me-3">
+                          <i class="fa fa-person" style="font-size:20px !important;"></i>
+                        </span>
+                        <span class="small text-secondary me-auto">Customers</span>
+                        
+                      </a>
+                    </li>
+                    @endcan
                   </ul>
                   <h3 class="mb-2 text-secondary text-uppercase small">Setup</h3>
                   <ul class="nav flex-column mb-12">

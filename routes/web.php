@@ -31,6 +31,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['permission:view categories|edit categories|delete categories']], function () {
         Route::resource('categories', App\Http\Controllers\CategoryController::class);
     });
+     Route::group(['middleware' => ['permission:view customers|edit customers|delete customers']], function () {
+        Route::resource('customers', App\Http\Controllers\CustomerController::class);
+    });
 });
 
 Route::get('/tables', [App\Http\Controllers\HomeController::class, 'tables'])->name('tables');
