@@ -25,8 +25,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function tables()
-    {
-        return view('template.tables');
-    }
 }

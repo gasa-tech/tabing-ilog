@@ -33,4 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::get('/tables', [App\Http\Controllers\HomeController::class, 'tables'])->name('tables');
+Route::get('/tables', function () { return view('template.tables'); })->name('template.tables');
+
+
+

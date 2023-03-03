@@ -13,9 +13,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('id','!=',1)->get();
+        $users = User::where('id','!=',1)->with('roles')->latest();
+        $users = $users->paginate(10);
+        $users = $users->appends($request->except('page'));
+
         return view('users.index',compact('users'));
     }
 

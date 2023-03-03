@@ -167,7 +167,7 @@
                     </svg>
                   </button>
               </div>
-              <a class="flex-shrink-0 btn btn-primary d-flex align-items-center" href="#">
+              <a class="flex-shrink-0 btn btn-primary d-flex align-items-center gt-rounded-10 btn-lg" href="#">
                 <span class="d-inline-block me-2 text-primary-light">
                   <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 16px;height: 16px">
                     <path d="M12.6667 1.33334H3.33333C2.19999 1.33334 1.33333 2.20001 1.33333 3.33334V12.6667C1.33333 13.8 2.19999 14.6667 3.33333 14.6667H12.6667C13.8 14.6667 14.6667 13.8 14.6667 12.6667V3.33334C14.6667 2.20001 13.8 1.33334 12.6667 1.33334ZM10.6667 8.66668H8.66666V10.6667C8.66666 11.0667 8.4 11.3333 8 11.3333C7.6 11.3333 7.33333 11.0667 7.33333 10.6667V8.66668H5.33333C4.93333 8.66668 4.66666 8.40001 4.66666 8.00001C4.66666 7.60001 4.93333 7.33334 5.33333 7.33334H7.33333V5.33334C7.33333 4.93334 7.6 4.66668 8 4.66668C8.4 4.66668 8.66666 4.93334 8.66666 5.33334V7.33334H10.6667C11.0667 7.33334 11.3333 7.60001 11.3333 8.00001C11.3333 8.40001 11.0667 8.66668 10.6667 8.66668Z" fill="currentColor"></path>
@@ -197,7 +197,7 @@
                 <span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:10px !important;">
-                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="{{ url('users') }}">Accounts</a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
@@ -227,6 +227,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @yield('javascript')
     <script>
       $('.delete').click(function() {
@@ -235,6 +236,57 @@
           $(this).closest('td').find('form').submit();
         }
       })
+    </script>
+    <script type="text/javascript">      
+      var success = "{{ Session::get('success') }}";
+      if (success) {
+          swal ({
+              text: success,
+              icon: 'success',
+              button: 'OK',
+          });
+      }
+      var deleted = "{{ Session::get('deleted') }}";
+      if (deleted) {
+          swal ({
+              text: deleted,
+              icon: 'error',
+              button: 'OK',
+          });
+      }
+      var error = "{{ Session::get('error') }}";
+      if (error) {
+          swal ({
+              text: error,
+              icon: 'error',
+              button: 'OK',
+          });
+      }
+      var danger = "{{ Session::get('flash_danger') }}";
+      if (danger) {
+          swal ({
+              text: danger,
+              icon: 'error',
+              button: 'OK',
+          });
+      }
+      var warning = "{{ Session::get('warning') }}";
+      if (warning) {
+          swal ({
+              text: warning,
+              icon: 'info',
+              button: 'OK',
+          });
+      }
+      var errors = $('.alert-errors').length;
+      var html_errors = $('#html_errors').val();
+      if(errors){
+          swal ({
+              text: html_errors,
+              icon: 'error',
+              button: 'OK',
+          });
+      }
     </script>
 </body>
 
