@@ -86,7 +86,50 @@
     </div>
 
 @endsection
-@section('scripts')
-  
+@section('javascript')
+<script type="text/javascript">
+
+    var inputs = {!! json_encode($columns) !!}; 
+
+    $(function () {
+        
+            $("button#upload").bind("click", function () {
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                var table = $("#table-import tbody");
+                table.empty();
+                if (regex.test($("#fileUploads").val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            console.log(e);
+                            var rows = e.target.result.split("\n");
+                            for (var i = 1; i < rows.length; i++) {
+                                var row = $("<tr />");
+                                var cells = rows[i].split(",");
+                                for (var j = 0; j < cells.length; j++) {
+                                    var cell_text = cells[j];
+                                    var input = '<input type="text" class="border-0 text-center" name="import['+i+']['+inputs[j]+']" title="'+inputs[j]+'" value="'+cell_text+'" >';
+                                    var cell = $("<td />");
+                                    cell.html(input);
+                                    row.append(cell);
+                                }
+                                table.append(row);
+                            }
+                            
+                        }
+                        reader.readAsText($("#fileUploads")[0].files[0]);
+                    } else {
+                        alert("This browser does not support HTML5.");
+                    }
+                } else {
+                    alert("Please upload a valid .CSV or .txt file.");
+                }
+            });
+        });
+        $('#cancel').on('click', function(e) { 
+            $('#table-import tbody').empty();
+        });
+
+</script>
 
 @endsection
