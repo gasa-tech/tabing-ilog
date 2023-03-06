@@ -253,15 +253,14 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"> instead of <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" </script>
     @yield('javascript')
-    <script>
+    <script type="text/javascript">      
       $('.delete').click(function() {
         const response = confirm('Are you sure you want to delete this record?');
         if(response) {
           $(this).closest('td').find('form').submit();
         }
-      })
-    </script>
-    <script type="text/javascript">      
+      });
+
       var success = "{{ Session::get('success') }}";
       if (success) {
           swal ({
@@ -311,39 +310,6 @@
               button: 'OK',
           });
       }
-
-      $(document).on('click', '.stock-history', function(){
-
-          var source = $(this).data('source');
-          var modal = $($(this).data('target'));
-          var url = $(this).data('url');
-          var tbody = modal.find('tbody');
-          $.ajax({
-              url: source,
-              success:function(data){
-                  tbody.empty();
-                  var json = JSON.parse(data['adjustments']);
-                  if(json){
-                      modal.find('table').show();
-                      modal.find('.modal-body p').hide();
-
-                      $.each(json, function(i, item){
-                          var tr = $('<tr>');
-                          tr.append('<td>'+item['date']+'</td>');
-                          tr.append('<td>'+item['previous']+'</td>');
-                          tr.append('<td>'+item['after']+'</td>');
-                          tr.append('<td>'+item['user']+'</td>');
-                          tbody.append(tr);
-                      });
-
-                  }else{
-                      modal.find('table').hide();
-                      modal.find('.modal-body').append('<p class="text-center">No history of this product.</p>');
-                  }
-              }
-          })
-      });
-
     </script>
 </body>
 
