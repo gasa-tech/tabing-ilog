@@ -30,6 +30,12 @@ class UserRolesPermissionSeeder extends Seeder
         Permission::create(['name' => 'view customers']);
         Permission::create(['name' => 'edit customers']);
         Permission::create(['name' => 'delete customers']);
+        Permission::create(['name' => 'view suppliers']);
+        Permission::create(['name' => 'edit suppliers']);
+        Permission::create(['name' => 'delete suppliers']);
+        Permission::create(['name' => 'view products']);
+        Permission::create(['name' => 'edit products']);
+        Permission::create(['name' => 'delete products']);
 
         // create roles and assign created permissions
         $role = Role::create(['name' => 'Administrator']);

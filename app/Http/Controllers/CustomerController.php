@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::whereNull('deleted_at')->get();
+        $customers = Customer::get();
         return view('customers.index',compact('customers'));
     }
 
@@ -81,7 +81,7 @@ class CustomerController extends Controller
         $customer->address = $request->address;
         $customer->save();
 
-        return redirect()->back()->with('success','Customer updated successfully');
+        return redirect('/customers')->with('success','Customer updated successfully');
     }
 
     /**
@@ -92,9 +92,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer_delete =  Customer::find($customer->id);
-        $customer_delete->deleted_at = now(); 
-        $customer_delete->save();
+       $customer->delete();
 
         return redirect('/customers')->with('success','Record successfully deleted');
     }
