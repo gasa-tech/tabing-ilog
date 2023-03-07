@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventory;
 use Illuminate\Http\Request;
+use App\Models\{Product, Inventory};
 
 class InventoryController extends Controller
 {
@@ -14,7 +14,8 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        $inventories = Inventory::with('product')->get();
+        return view('inventories.index', compact('inventories'));
     }
 
     /**
@@ -46,7 +47,7 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-        //
+        return $inventory;
     }
 
     /**
@@ -57,7 +58,8 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        $inventory = Inventory::with('product')->find($inventory->id);
+        return view('inventories.edit',compact('inventory'));
     }
 
     /**
@@ -69,7 +71,24 @@ class InventoryController extends Controller
      */
     public function update(Request $request, Inventory $inventory)
     {
-        //
+        $json = json_decode($inventory->adjustments, true);
+        $collect = collect($json);
+        $new_quantity = $inventory->current_quantity + $request->stock_adjustment;
+        $adjustment = [
+            'previous'  => $inventory->current_quantity,
+            'after'     => $inventory->current_quantity + $request->stock_adjustment,
+            'date'      => date('F d Y h:i a'),
+            'remarks'   => $request->remarks,
+            'user'      => auth()->user()->name,
+        ];
+        $collect->push($adjustment);
+    
+        $inventory->current_quantity = $new_quantity;
+        $inventory->adjustments = json_encode($collect);
+        $inventory->updated_at = now();
+        $inventory->save();
+
+        return redirect('/inventories')->with('success',$inventory->product->name . ' has been updated successfully!  ' . $inventory->current_quantity . '  is the new Stock of this Product');
     }
 
     /**

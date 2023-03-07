@@ -34,6 +34,16 @@ Route::group(['middleware' => ['auth']], function () {
      Route::group(['middleware' => ['permission:view customers|edit customers|delete customers']], function () {
         Route::resource('customers', App\Http\Controllers\CustomerController::class);
     });
+    Route::group(['middleware' => ['permission:view suppliers|edit suppliers|delete suppliers']], function () {
+        Route::resource('suppliers', App\Http\Controllers\SupplierController::class);
+    });
+    Route::group(['middleware' => ['permission:view products|edit products|delete products']], function () {
+        Route::resource('products', App\Http\Controllers\ProductController::class);
+        Route::resource('inventories', App\Http\Controllers\InventoryController::class);
+        Route::get('/import-products', [App\Http\Controllers\ProductController::class, 'import_get'])->name('products.import_get');
+        Route::post('/import-products', [App\Http\Controllers\ProductController::class, 'import_post'])->name('products.import_post');
+        
+    });
 });
 
 Route::get('/tables', function () { return view('template.tables'); })->name('template.tables');

@@ -99,8 +99,19 @@
                        
                       </a>
                     </li>
+                    @can('view products','edit products')
                     <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="#">
+                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{route('products.index')}}">
+                        <span class="d-inline-block text-secondary me-3">
+                          <i class="fa fa-file" style="font-size:20px !important;"></i>
+                        </span>
+                        <span class="small text-secondary me-auto">Products</span>
+                        
+                      </a>
+                    </li>
+                    @endcan
+                    <li class="nav-item nav-pills">
+                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{route('inventories.index')}}">
                         <span class="d-inline-block text-secondary me-3">
                           <i class="fa fa-shopping-cart" style="font-size:20px !important;"></i>
                         </span>
@@ -108,12 +119,13 @@
                        
                       </a>
                     </li>
+                    
                     <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="#">
+                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{ route('suppliers.index')}}">
                         <span class="d-inline-block text-secondary me-3">
-                          <i class="fa fa-file" style="font-size:20px !important;"></i>
+                          <i class="fas fa-shipping-fast" style="font-size:20px !important;"></i>
                         </span>
-                        <span class="small text-secondary me-auto">Products</span>
+                        <span class="small text-secondary me-auto">Suppliers</span>
                         
                       </a>
                     </li>
@@ -239,16 +251,16 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"> instead of <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" </script>
     @yield('javascript')
-    <script>
+    <script type="text/javascript">      
       $('.delete').click(function() {
         const response = confirm('Are you sure you want to delete this record?');
         if(response) {
           $(this).closest('td').find('form').submit();
         }
-      })
-    </script>
-    <script type="text/javascript">      
+      });
+
       var success = "{{ Session::get('success') }}";
       if (success) {
           swal ({
@@ -299,6 +311,8 @@
           });
       }
     </script>
+    
+  
 </body>
 
    
