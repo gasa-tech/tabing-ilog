@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/pos', [App\Http\Controllers\PosController::class, 'index'])->name('pos');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['permission:view users|edit users']], function () {
         Route::resource('users', App\Http\Controllers\UserController::class);
