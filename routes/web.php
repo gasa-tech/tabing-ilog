@@ -42,9 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['permission:view products|edit products|delete products']], function () {
         Route::resource('products', App\Http\Controllers\ProductController::class);
         Route::resource('inventories', App\Http\Controllers\InventoryController::class);
-        Route::get('/import-products', [App\Http\Controllers\ProductController::class, 'import_get'])->name('products.import_get');
+        Route::get('/products-import', [App\Http\Controllers\ProductController::class, 'import_get'])->name('products.import_get');
         Route::post('/import-products', [App\Http\Controllers\ProductController::class, 'import_post'])->name('products.import_post');
-        
     });
 });
 

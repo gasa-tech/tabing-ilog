@@ -40,6 +40,7 @@ class CustomerController extends Controller
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->address = $request->address;
+        $customer->landmark = $request->landmark;
         $customer->save();
 
         return redirect('/customers')->with('success','Customer added successfully');
@@ -79,6 +80,7 @@ class CustomerController extends Controller
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->address = $request->address;
+        $customer->landmark = $request->landmark;
         $customer->save();
 
         return redirect('/customers')->with('success','Customer updated successfully');

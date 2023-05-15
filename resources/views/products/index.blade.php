@@ -9,7 +9,7 @@
             <div class="d-flex mb-6 align-items-center justify-content-between">
               <h4 class="mb-0">Product List</h4>
               <div>
-                @can('edit suppliers')
+                @can('edit products')
                 <a class="btn btn-sm btn-primary d-inline-flex align-items-center" href="{{ route('products.create') }}">
                   <span>Add Product</span>
                 </a>
@@ -61,7 +61,7 @@
                             <a class="btn btn-sm btn-primary d-inline-flex align-items-center" href="{{ route('products.edit',$product->id) }}">
                             <span>Edit</span>
                             </a>
-                            @can('delete customers')
+                            @can('delete products')
                             <button class="btn btn-sm btn-danger d-inline-flex align-items-center delete" type="button">
                                 <span>Delete</span>
                             </button>

@@ -34,6 +34,10 @@
                 <div class="mb-4">
                     <input class="w-full px-4 py-1 mb-2 text-sm placeholder-gray-500 bg-white border rounded" type="text" name="address" value="{{ $customer->address }}" required>
                 </div>
+                <label class="text-sm font-medium mb-2" for="description">Landmark:</label>
+                <div class="mb-4">
+                    <input class="w-full px-4 py-1 mb-2 text-sm placeholder-gray-500 bg-white border rounded" type="text" name="landmark" required>
+                </div>
                 <button type="submit" class="btn btn-sm btn-primary d-inline-flex align-items-center mt-5 mb-5">
                     <span>Update Record</span>
                 </button>

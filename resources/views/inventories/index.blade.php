@@ -9,7 +9,7 @@
               <div class="d-flex mb-6 align-items-center justify-content-between">
                 <h4 class="mb-0">Inventory List</h4>
                 <div>
-                  @can('edit suppliers')
+                  @can('edit products')
                   <a class="btn btn-sm btn-primary d-inline-flex align-items-center" href="{{ route('products.create') }}">
                     <span>Add Inventory</span>
                   </a>
