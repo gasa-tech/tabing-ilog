@@ -81,11 +81,11 @@
                     
                     @can('view categories','edit categories')
                     <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{ route('categories.index') }}">
-                        <span class="d-inline-block text-secondary me-3">
+                      <a class="nav-link p-3 d-flex align-items-center {{ Request::is('categories*') ? 'bg-primary text-white' : 'text-secondary' }}" href="{{ route('categories.index') }}">
+                        <span class="d-inline-block me-3">
                             <i class="fa fa-file" style="font-size:20px !important;"></i>
                         </span>
-                        <span class="small text-secondary me-auto">Categories</span>
+                        <span class="small me-auto">Categories</span>
                       </a>
                     </li>
                     @endcan
@@ -101,41 +101,43 @@
                     </li>
                     @can('view products','edit products')
                     <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{route('products.index')}}">
-                        <span class="d-inline-block text-secondary me-3">
+                      <a class="nav-link p-3 d-flex align-items-center {{ Request::is('products*') ? 'bg-primary text-white' : 'text-secondary' }}" href="{{route('products.index')}}">
+                        <span class="d-inline-block me-3">
                           <i class="fa fa-file" style="font-size:20px !important;"></i>
                         </span>
-                        <span class="small text-secondary me-auto">Products</span>
+                        <span class="small me-auto">Products</span>
+                      </a>
+                    </li>
+
+                    <li class="nav-item nav-pills">
+                      <a class="nav-link p-3 d-flex align-items-center {{ Request::is('inventories*') ? 'bg-primary text-white' : 'text-secondary' }}" href="{{route('inventories.index')}}">
+                        <span class="d-inline-block me-3">
+                          <i class="fa fa-shopping-cart" style="font-size:20px !important;"></i>
+                        </span>
+                        <span class="small me-auto">Inventory</span>
+                      </a>
+                    </li>
+                    @endcan
+                    
+                    @can('view suppliers','edit suppliers')
+                    <li class="nav-item nav-pills">
+                      <a class="nav-link p-3 d-flex align-items-center {{ Request::is('suppliers*') ? 'bg-primary text-white' : 'text-secondary' }}" href="{{ route('suppliers.index')}}">
+                        <span class="d-inline-block me-3">
+                          <i class="fas fa-shipping-fast" style="font-size:20px !important;"></i>
+                        </span>
+                        <span class="small me-auto">Suppliers</span>
                         
                       </a>
                     </li>
                     @endcan
-                    <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{route('inventories.index')}}">
-                        <span class="d-inline-block text-secondary me-3">
-                          <i class="fa fa-shopping-cart" style="font-size:20px !important;"></i>
-                        </span>
-                        <span class="small text-secondary me-auto">Inventory</span>
-                       
-                      </a>
-                    </li>
-                    
-                    <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{ route('suppliers.index')}}">
-                        <span class="d-inline-block text-secondary me-3">
-                          <i class="fas fa-shipping-fast" style="font-size:20px !important;"></i>
-                        </span>
-                        <span class="small text-secondary me-auto">Suppliers</span>
-                        
-                      </a>
-                    </li>
+
                     @can('view customers','edit customers')
                     <li class="nav-item nav-pills">
-                      <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{ route('customers.index') }}">
-                        <span class="d-inline-block text-secondary me-3">
+                      <a class="nav-link p-3 d-flex align-items-center {{ Request::is('customers*') ? 'bg-primary text-white' : 'text-secondary' }}" href="{{ route('customers.index') }}">
+                        <span class="d-inline-block me-3">
                           <i class="fa fa-person" style="font-size:20px !important;"></i>
                         </span>
-                        <span class="small text-secondary me-auto">Customers</span>
+                        <span class="small me-auto">Customers</span>
                         
                       </a>
                     </li>
@@ -154,11 +156,11 @@
 
                   @can('view users','edit users', 'view roles', 'edit roles') 
                   <li class="nav-item nav-pills">
-                    <a class="nav-link text-secondary p-3 d-flex align-items-center" href="{{ route('users.index') }}">
-                      <span class="d-inline-block text-secondary me-3">
+                    <a class="nav-link p-3 d-flex align-items-center {{ Request::is('users*') ? 'bg-primary text-white' : 'text-secondary' }}" href="{{ route('users.index') }}">
+                      <span class="d-inline-block me-3">
                         <i class="fa fa-user" style="font-size:20px !important;"></i>
                       </span>
-                      <span class="small text-secondary me-auto">Users</span>
+                      <span class="small me-auto">Users</span>
                     </a>
                   </li>
                   @endcan

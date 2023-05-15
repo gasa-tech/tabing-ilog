@@ -27,9 +27,12 @@
                   <th class="py-4 px-6">
                     <span class="me-2">Address</span>
                   </th>
-                    <th class="py-4 px-6" width="20%">
-                      <span class="me-2">Actions</span>
-                    </th>
+                  <th class="py-4 px-6">
+                    <span class="me-2">Landmark</span>
+                  </th>
+                  <th class="py-4 px-6" width="20%">
+                    <span class="me-2">Actions</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -37,6 +40,7 @@
                   <tr>
                     <td class="py-5 px-6"> {{ $customer->first_name ?? '' }} {{ $customer->last_name }} </td>
                     <td class="py-5 px-6"> {{ $customer->address ?? '' }} </td>
+                    <td class="py-5 px-6"> {{ $customer->landmark ?? '' }} </td>
                     <td class="py-5 px-6"> 
                         <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">@csrf @method('DELETE')</form>
                         <a class="btn btn-sm btn-primary d-inline-flex align-items-center" href="{{ route('customers.edit',$customer->id) }}">
